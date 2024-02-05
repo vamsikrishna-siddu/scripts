@@ -158,13 +158,13 @@ function configureAndInstall() {
 	cd $SOURCE_ROOT/bazel
 	curl -sSL $PATCH_URL/bazel-netty.patch | git apply || error "Patch Bazel netty"
 
-	printf -- '\nBuild Bazel from source... \n'
+	#printf -- '\nBuild Bazel from source... \n'
 	cd $SOURCE_ROOT/bazel
-	${SOURCE_ROOT}/dist/bazel/output/bazel build -c opt --stamp --embed_label "5.3.2" //src:bazel //src:bazel_jdk_minimal //src:test_repos
+	#${SOURCE_ROOT}/dist/bazel/output/bazel build -c opt --stamp --embed_label "5.3.2" //src:bazel //src:bazel_jdk_minimal //src:test_repos
   	mkdir -p output
-  	cp bazel-bin/src/bazel output/bazel
+  	cp ${SOURCE_ROOT}/dist/bazel/output/bazel output/bazel
 	# Rebuild bazel using itself
-  	./output/bazel build  -c opt --stamp --embed_label "5.3.2" //src:bazel //src:bazel_jdk_minimal //src:test_repos
+  	#./output/bazel build  -c opt --stamp --embed_label "5.3.2" //src:bazel //src:bazel_jdk_minimal //src:test_repos
 
 	# Run Tests
 	runTest
